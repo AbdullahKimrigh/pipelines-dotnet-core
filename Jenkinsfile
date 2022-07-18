@@ -2,31 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Restore') {
+        stage('Restore Package') {
             steps {
-                bat "dotnet restore **/pipelines-dotnet-core.csproj"
+                bat "dotnet restore"
             }
         }
         
         stage('Clean') {
             steps {
-                bat "dotnet clean **/pipelines-dotnet-core.csproj"
+                bat "dotnet clean"
             }
         }
         
         stage('Build') {
             steps {
-                bat "dotnet build **/pipelines-dotnet-core.csproj"
+                bat "dotnet build **/pipelines-dotnet-core.csproj --configuration release"
                 }
             }
         
         stage('Test') {
             steps {
-                bat "dotnet test **/pipelines-dotnet-core.csproj"
+                bat "dotnet test --logger trx **/pipelines-dotnet-core.csproj"
                 }
             post {
                 always {
-                    junit '**/target/surefire-reports/TEST-*.xml'
+                    mstest testResultsFile:"**/*.trx", keepLongStdio: true
                 }
             }
             }
