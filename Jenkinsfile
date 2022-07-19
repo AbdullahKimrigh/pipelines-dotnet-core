@@ -21,7 +21,7 @@ pipeline {
 
             post {
                 always {
-                    mstest testResultsFile:'**/bin/Debug/net6.0/.dll', keepLongStdio: true
+                    mstest testResultsFile:'**/target/surefire-reports/TEST-*.xml'
                     }
             }
         }
