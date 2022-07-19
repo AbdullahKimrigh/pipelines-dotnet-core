@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Restore Package') {
             steps {
-                bat "dotnet restore"
+                bat "dotnet Restore"
             }
         }
         
@@ -31,15 +31,15 @@ pipeline {
             }
             }
         
-        // stage('Publish') {
-        //     steps{
-        //     bat "dotnet publish **/pipelines-dotnet-core.csproj"
-        //     }
+        stage('Publish') {
+            steps{
+            bat "dotnet publish **/pipelines-dotnet-core.csproj"
+            }
         
-        //     post{
-        //         success {
-        //             archiveArtifacts artifacts: '*/bin/Debug/net6.0/.dll', followSymlinks: false
-        //         }
-        //     }
-        // }
+            post{
+                success {
+                    archiveArtifacts artifacts: '**/bin/Debug/net6.0/.dll', followSymlinks: false
+                }
+            }
+        }
     }
