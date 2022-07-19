@@ -10,7 +10,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'dotnet build --configuration release **/pipelines-dotnet-core.csproj'
+                sh 'dotnet build --configuration release /pipelines-dotnet-core.csproj'
             }
         }
         
