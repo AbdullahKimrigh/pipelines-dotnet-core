@@ -2,27 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage("Restore Package") {
+        stage("Restore nuget") {
             steps {
-                bat "dotnet Restore"
-            }
-        }
-        
-        stage('Clean') {
-            steps {
-                bat "dotnet clean"
+                bat 'dotnet restore'
+                bat 'nuget restore BigProject.sln'
             }
         }
         
         stage('Build') {
             steps {
-                bat "dotnet build **/pipelines-dotnet-core.csproj --configuration release"
+                bat 'dotnet build --configuration release **/pipelines-dotnet-core.csproj'
             }
         }
         
         stage('Test') {
             steps {
-                bat "dotnet test --logger trx **/pipelines-dotnet-core.csproj"
+                bat 'dotnet test --logger trx **/pipelines-dotnet-core.csproj'
             }
 
             post {
@@ -34,7 +29,7 @@ pipeline {
         
         stage('Publish') {
             steps{
-            bat "dotnet publish **/pipelines-dotnet-core.csproj"
+            bat 'dotnet publish **/pipelines-dotnet-core.csproj'
             }
         
             post{
