@@ -16,12 +16,12 @@ pipeline {
         
         stage('Test') {
             steps {
-                sh 'dotnet test --logger trx ./pipelines-dotnet-core.csproj'
+                sh 'dotnet test ./pipelines-dotnet-core.csproj'
             }
 
             post {
                 always {
-                    mstest testResultsFile:'*/bin/Debug/net6.0/.dll', keepLongStdio: true
+                    mstest testResultsFile:'**/bin/Debug/net6.0/.dll', keepLongStdio: true
                     }
             }
         }
