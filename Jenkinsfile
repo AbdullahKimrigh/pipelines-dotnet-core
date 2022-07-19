@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Restore Package') {
+        stage(Restore Package) {
             steps {
                 bat "dotnet Restore"
             }
         }
         
-        stage('Clean') {
+        stage(Clean) {
             steps {
                 bat "dotnet clean"
             }
