@@ -4,20 +4,20 @@ pipeline {
     stages {
         stage("Restore nuget") {
             steps {
-                bat 'dotnet restore'
-                bat 'nuget restore BigProject.sln'
+                sh 'dotnet restore'
+                sh 'nuget restore BigProject.sln'
             }
         }
         
         stage('Build') {
             steps {
-                bat 'dotnet build --configuration release **/pipelines-dotnet-core.csproj'
+                sh 'dotnet build --configuration release **/pipelines-dotnet-core.csproj'
             }
         }
         
         stage('Test') {
             steps {
-                bat 'dotnet test --logger trx **/pipelines-dotnet-core.csproj'
+                sh 'dotnet test --logger trx **/pipelines-dotnet-core.csproj'
             }
 
             post {
@@ -29,7 +29,7 @@ pipeline {
         
         stage('Publish') {
             steps{
-            bat 'dotnet publish **/pipelines-dotnet-core.csproj'
+                sh 'dotnet publish **/pipelines-dotnet-core.csproj'
             }
         
             post{
