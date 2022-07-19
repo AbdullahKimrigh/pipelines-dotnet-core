@@ -21,7 +21,7 @@ pipeline {
 
             post {
                 always {
-                    mstest testResultsFile:"**/*.trx", keepLongStdio: true
+                    mstest testResultsFile:'*/bin/Debug/net6.0/.dll', keepLongStdio: true
                     }
             }
         }
