@@ -5,7 +5,6 @@ pipeline {
         stage("Restore nuget") {
             steps {
                 sh 'dotnet restore'
-                sh 'nuget restore BigProject.sln'
             }
         }
         
