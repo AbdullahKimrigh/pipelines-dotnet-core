@@ -21,7 +21,7 @@ pipeline {
 
             post {
                 always {
-                    junit testResults:'**/target/surefire-reports/TEST-*.xml'
+                    junit testResults:'**/pipelines-dotnet-core.dll'
                     }
             }
         }
