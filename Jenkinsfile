@@ -24,12 +24,13 @@ pipeline {
             steps {
                 bat "dotnet test --logger trx **/pipelines-dotnet-core.csproj"
                 }
+
             post {
                 always {
                     mstest testResultsFile:"**/*.trx", keepLongStdio: true
                     }
                 }
-            }
+        }
         
         stage('Publish') {
             steps{
