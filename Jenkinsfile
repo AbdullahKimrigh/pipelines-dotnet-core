@@ -10,13 +10,13 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'dotnet build --configuration release /pipelines-dotnet-core.csproj'
+                sh 'dotnet build --configuration release */pipelines-dotnet-core.csproj'
             }
         }
         
         stage('Test') {
             steps {
-                sh 'dotnet test --logger trx **/pipelines-dotnet-core.csproj'
+                sh 'dotnet test --logger trx */pipelines-dotnet-core.csproj'
             }
 
             post {
@@ -28,7 +28,7 @@ pipeline {
         
         stage('Publish') {
             steps{
-                sh 'dotnet publish **/pipelines-dotnet-core.csproj'
+                sh 'dotnet publish */pipelines-dotnet-core.csproj'
             }
         
             post{
