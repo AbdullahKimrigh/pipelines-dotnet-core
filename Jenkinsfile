@@ -27,8 +27,8 @@ pipeline {
             post {
                 always {
                     mstest testResultsFile:"**/*.trx", keepLongStdio: true
+                    }
                 }
-            }
             }
         
         stage('Publish') {
