@@ -17,19 +17,19 @@ pipeline {
         stage('Build') {
             steps {
                 bat "dotnet build **/pipelines-dotnet-core.csproj --configuration release"
-                }
             }
+        }
         
         stage('Test') {
             steps {
                 bat "dotnet test --logger trx **/pipelines-dotnet-core.csproj"
-                }
+            }
 
             post {
                 always {
                     mstest testResultsFile:"**/*.trx", keepLongStdio: true
                     }
-                }
+            }
         }
         
         stage('Publish') {
