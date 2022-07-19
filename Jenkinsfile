@@ -19,11 +19,11 @@ pipeline {
                 sh 'dotnet test ./pipelines-dotnet-core.csproj'
             }
 
-            post {
-                always {
-                    junit testResults:'**/pipelines-dotnet-core.dll'
-                    }
-            }
+            // post {
+            //     always {
+            //         junit testResults:'**/pipelines-dotnet-core.dll'
+            //         }
+            // }
         }
         
         stage('Publish') {
