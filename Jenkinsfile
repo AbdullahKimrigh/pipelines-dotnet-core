@@ -41,12 +41,12 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
-                dotnet SonarScanner.MSBuild.exe begin /
+                dotnet SonarScanner begin /
                     k:$SONAR_PROJECT_NAME /
                     d:sonar.host.url=http://$SONAR_IP  /
                     d:sonar.login=$SONAR_TOKEN
 
-                dotnet SonarScanner.MSBuild.exe end /
+                dotnet SonarScannere end /
                     d:sonar.login=$SONAR_TOKEN
                 '''
             }
