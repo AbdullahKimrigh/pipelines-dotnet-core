@@ -42,6 +42,7 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
+                export PATH="$PATH:/root/.dotnet/tools"
                 dotnet sonarscanner begin /
                     k:$SONAR_PROJECT_KEY /
                     n:&SONAR_PROJECT_NAME /	
