@@ -42,7 +42,6 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
-                dotnet tool install --global dotnet-sonarscanner
                 dotnet sonarscanner begin /
                     k:$SONAR_PROJECT_KEY /
                     n:&SONAR_PROJECT_NAME /	
