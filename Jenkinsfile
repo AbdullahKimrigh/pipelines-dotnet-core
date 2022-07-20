@@ -36,12 +36,6 @@ pipeline {
             steps {
                 sh 'dotnet test ./pipelines-dotnet-core.csproj'
             }
-
-            post {
-                always {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    }
-            }
         }
 
         stage('Quality Scan'){
@@ -57,9 +51,10 @@ pipeline {
             }
         }
 
-        stage('Package') {
+        stage('Publish') {
             steps {                
                 sh "dotnet List Package"
+                sh 'dotnet publish'
             }
 
             post {
@@ -69,16 +64,18 @@ pipeline {
             }
         }
         
-        stage('Publish') {
+        stage('Publish Artifacts') {
             steps{
-                sh 'dotnet publish ./pipelines-dotnet-core.csproj'
-            }
-        
-            post{
-                success {
-                    archiveArtifacts artifacts: '**/bin/Debug/net6.0/*.dll', followSymlinks: false
-                }
+                sh "aws configure set region us-east-1"
+                sh "aws s3 cp ./target/**.war s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh 'aws elasticbeanstalk create-application-version --application-name $AWS_EB_APP_NAME --version-label $AWS_EB_APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=$ARTIFACT_NAME'
+                sh 'aws elasticbeanstalk update-environment --application-name $AWS_EB_APP_NAME --environment-name $AWS_EB_ENVIRONMENT --version-label $AWS_EB_APP_VERSION'                
+            }
+        } 
     }
 }
