@@ -60,7 +60,7 @@ pipeline {
 
             post {
                 success {
-                    archiveArtifacts artifacts: '**/bin/Debug/net6.0/*.dllr', followSymlinks: false                  
+                    archiveArtifacts artifacts: '**/bin/Debug/net6.0/*.dll', followSymlinks: false                  
                 }
             }
         }
