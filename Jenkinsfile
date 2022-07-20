@@ -41,6 +41,7 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
+                dotnet ef migrations add InitialCreate
                 dotnet sonarscanner begin /
                     k:$SONAR_PROJECT_NAME /
                     d:sonar.host.url="http://$SONAR_IP" /
