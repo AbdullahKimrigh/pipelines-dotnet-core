@@ -41,8 +41,6 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
-                export PATH="$PATH:/root/.dotnet/tools"
-                dotnet tool install --global dotnet-ef
                 dotnet SonarScanner.MSBuild.exe begin /
                     k:$SONAR_PROJECT_NAME /
                     d:sonar.host.url=http://$SONAR_IP  /
