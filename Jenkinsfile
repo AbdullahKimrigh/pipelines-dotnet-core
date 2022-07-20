@@ -13,7 +13,6 @@ pipeline {
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Dotnetwebapp-env" //Name os the AWS elasticbeans environemnt of the application
         
-        SONAR_PROJECT_KEY = "dotnet-app" 
         SONAR_PROJECT_NAME = "dotnet-app"
         SONAR_IP = "54.226.50.200"
         SONAR_TOKEN = "sqp_48241ccbd8e60a60e5e343d611cd07e5bb90bd10"
@@ -43,11 +42,12 @@ pipeline {
             steps {
                 sh '''
                 export PATH="$PATH:/root/.dotnet/tools"
+                dotnet tool install --global dotnet-ef
                 dotnet SonarScanner.MSBuild.exe begin /
-                    k:$SONAR_PROJECT_KEY /
-                    n:&SONAR_PROJECT_NAME /	
+                    k:$SONAR_PROJECT_NAME /
                     d:sonar.host.url=http://$SONAR_IP  /
-                    d:sonar.login=$SONAR_TOKEN                
+                    d:sonar.login=$SONAR_TOKEN
+
                 dotnet SonarScanner.MSBuild.exe end /
                     d:sonar.login=$SONAR_TOKEN
                 '''
