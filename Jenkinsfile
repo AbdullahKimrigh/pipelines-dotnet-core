@@ -13,7 +13,7 @@ pipeline {
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Dotnetwebapp-env" //Name os the AWS elasticbeans environemnt of the application
         
-        SONAR_PROJECT_NAME = "dotnet-app"
+        SONAR_PROJECT_NAME = "**/dotnet-app"
         SONAR_IP = "54.226.50.200"
         SONAR_TOKEN = "sqp_48241ccbd8e60a60e5e343d611cd07e5bb90bd10"
     }
