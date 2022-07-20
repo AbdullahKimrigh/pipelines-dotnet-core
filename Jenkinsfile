@@ -41,13 +41,10 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh '''
-                dotnet SonarScanner begin /
-                    k:$SONAR_PROJECT_NAME /
-                    d:sonar.host.url=http://$SONAR_IP  /
-                    d:sonar.login=$SONAR_TOKEN
-
-                dotnet SonarScannere end /
-                    d:sonar.login=$SONAR_TOKEN
+                dotnet tool install --global dotnet-sonarscanner
+                dotnet sonarscanner begin /k:"dotnet-app" /d:sonar.host.url="http://54.226.50.200"  /d:sonar.login="sqp_48241ccbd8e60a60e5e343d611cd07e5bb90bd10"
+                dotnet build
+                dotnet sonarscanner end /d:sonar.login="sqp_48241ccbd8e60a60e5e343d611cd07e5bb90bd10"
                 '''
             }
         }
