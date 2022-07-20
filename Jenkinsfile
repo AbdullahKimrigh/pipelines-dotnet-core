@@ -43,12 +43,12 @@ pipeline {
             steps {
                 sh '''
                 export PATH="$PATH:/root/.dotnet/tools"
-                dotnet sonarscanner begin /
+                dotnet SonarScanner.MSBuild.exe begin /
                     k:$SONAR_PROJECT_KEY /
                     n:&SONAR_PROJECT_NAME /	
                     d:sonar.host.url=http://$SONAR_IP  /
                     d:sonar.login=$SONAR_TOKEN                
-                dotnet sonarscanner end /
+                dotnet SonarScanner.MSBuild.exe end /
                     d:sonar.login=$SONAR_TOKEN
                 '''
             }
