@@ -9,9 +9,9 @@ pipeline {
 
         AWS_S3_BUCKET = "dotnet-artifacts-bucket" //Bucket Name
         ARTIFACT_NAME = "hello-world.war" //Name of the Artifacts
-        AWS_EB_APP_NAME = "dotnet-webapp" //Name of the AWS elasticbeans application
+        AWS_EB_APP_NAME = "dotnetwebapp" //Name of the AWS elasticbeans application
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "Dotnetwebapp-env" //Name os the AWS elasticbeans environemnt of the application
+        AWS_EB_ENVIRONMENT = "Dotnetwebapp-env-1" //Name os the AWS elasticbeans environemnt of the application
         
         SONAR_PROJECT_NAME = "dotnet-app"
         SONAR_IP = "54.226.50.200"
@@ -41,14 +41,15 @@ pipeline {
         stage('Quality Scan'){
             steps {
                 sh 'echo Sonar Scan Code Qulaity'
-                // sh '''
-                // dotnet sonarscanner begin /
-                //     k:$SONAR_PROJECT_NAME /
-                //     d:sonar.host.url="http://$SONAR_IP" /
-                //     d:sonar.login=$SONAR_TOKEN
-                // dotnet build
-                // dotnet sonarscanner end /d:sonar.login=$SONAR_TOKEN
-                // '''
+
+                sh '''
+                dotnet sonarscanner begin /
+                    k:$SONAR_PROJECT_NAME /
+                    d:sonar.host.url="http://$SONAR_IP" /
+                    d:sonar.login=$SONAR_TOKEN
+                dotnet build
+                dotnet sonarscanner end /d:sonar.login=$SONAR_TOKEN
+                '''
             }
         }
 
