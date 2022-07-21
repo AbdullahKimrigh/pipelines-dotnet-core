@@ -13,7 +13,7 @@ pipeline {
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Dotnetwebapp-env" //Name os the AWS elasticbeans environemnt of the application
         
-        SONAR_PROJECT_NAME = "**/dotnet-app"
+        SONAR_PROJECT_NAME = "dotnet-app"
         SONAR_IP = "54.226.50.200"
         SONAR_TOKEN = "sqp_48241ccbd8e60a60e5e343d611cd07e5bb90bd10"
     }
@@ -67,7 +67,7 @@ pipeline {
         stage('Publish Artifacts') {
             steps{
                 sh "aws configure set region us-east-1"
-                sh "aws s3 cp /var/lib/jenkins/workspace/Dotnet-app/bin/Debug/net6.0/*.dll s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
+                sh "aws s3 cp ./bin/Debug/net6.0/*.dll s3://$AWS_S3_BUCKET/$ARTIFACT_NAME"
             }
         }
 
