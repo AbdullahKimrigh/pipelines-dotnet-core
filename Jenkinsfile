@@ -8,7 +8,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key') //AWS secret key for user
 
         AWS_S3_BUCKET = "dotnet-artifacts-bucket" //Bucket Name
-        ARTIFACT_NAME = "hello-world.war" //Name of the Artifacts
+        ARTIFACT_NAME = "pipelines-dotnet-core.dll" //Name of the Artifacts
         AWS_EB_APP_NAME = "dotnet-webapp" //Name of the AWS elasticbeans application
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "dotnetwebapp-env" //Name os the AWS elasticbeans environemnt of the application
