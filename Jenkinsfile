@@ -42,14 +42,14 @@ pipeline {
             steps {
                 sh 'echo Sonar Scan Code Qulaity'
 
-                sh '''
-                dotnet sonarscanner begin /
-                    k:$SONAR_PROJECT_NAME /
-                    d:sonar.host.url="http://$SONAR_IP" /
-                    d:sonar.login=$SONAR_TOKEN
-                dotnet build
-                dotnet sonarscanner end /d:sonar.login=$SONAR_TOKEN
-                '''
+                // sh '''
+                // dotnet sonarscanner begin /
+                //     k:$SONAR_PROJECT_NAME /
+                //     d:sonar.host.url="http://$SONAR_IP" /
+                //     d:sonar.login=$SONAR_TOKEN
+                // dotnet build
+                // dotnet sonarscanner end /d:sonar.login=$SONAR_TOKEN
+                // '''
             }
         }
 
