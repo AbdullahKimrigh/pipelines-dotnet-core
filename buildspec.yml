@@ -22,7 +22,7 @@ phases:
     on-failure: ABORT
     commands:
     - echo Build start on 'date'
-    - dotnet publish
+    # - dotnet publish
     - mv bin/Debug/net6.0/pipelines-dotnet-core.dll ROOT.dll
     - echo Build ends on 'date'
 
