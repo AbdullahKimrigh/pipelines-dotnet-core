@@ -24,8 +24,8 @@ phases:
     - echo Build start on 'date'
     - dotnet publish
     - mv bin/Debug/net6.0/pipelines-dotnet-core.dll ROOT.dll
+    - aws codepipeline start-pipeline-execution --name API-Testing
     - echo Build ends on 'date'
-    - aws CodePipeline start-pipeline-execution --name API-Testing
 
 artifacts:
   files:
